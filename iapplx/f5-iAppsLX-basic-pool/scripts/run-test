@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "installing npm modules..."
+npm install
+echo "running test..."
+npm test
+echo "removing non-production modules..."
+npm prune --production
+echo "build successful"
