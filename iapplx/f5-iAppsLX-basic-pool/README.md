@@ -8,7 +8,7 @@ This iApp also demostrates usage of identified requests with custom HTTPS port w
 
 ## Build (requires rpmbuild)
 
-    $ ./scripts/build
+    $ npm run build
 
 Build output is an RPM package
 ## Using IAppLX from BIG-IP UI

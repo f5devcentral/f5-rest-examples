@@ -1,13 +1,13 @@
 {
   "name": "f5-iappslx-basic-pool",
-  "version": "1.0.0",
+  "version": "0.0.5",
   "private": true,
   "description": "basic iapp to set up a pool on a local or remote big-ip",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec",
     "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha -- -R spec",
     "docs": "./node_modules/jsdoc/jsdoc.js -r ./src -d ./docs",
-    "build": "rpmbuild -bb --define 'main ./f5-iAppslx-basic-pool' --define '_topdir %{main}/build' f5-iapplx-basic-pool.spec"
+    "build": "rpmbuild --define \"main `pwd`\" --define \"_topdir %{main}/build\" -bb f5-iapplx-basic-pool.spec"
   },
   "author": "iappsdev@f5.com",
   "license": "Apache-2.0",
