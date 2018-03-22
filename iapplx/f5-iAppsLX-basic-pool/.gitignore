@@ -1,0 +1,11 @@
+node_modules
+
+.idea
+
+build
+BUILD
+BUILDROOT
+RPMS
+SOURCES
+SPECS
+SRPMS
