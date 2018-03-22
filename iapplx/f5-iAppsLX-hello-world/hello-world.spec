@@ -39,5 +39,5 @@ rm -rf $RPM_BUILD_ROOT
 %{IAPP_DIR}
 
 %changelog
-* Thu Mar 03 2016 Manju Bhat <m.bhat@f5.com>
+* Thu Mar 03 2016 iApp Dev <iappsdev@f5.com>
 - Initial version

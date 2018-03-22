@@ -16,9 +16,9 @@ If you are using BIG-IP, install f5-iappslx-basic-pool RPM package using iApps->
 
 Pool name is mandatory when creating or updating iAppLX configuration. Optionally you can add any number of pool members.
 
-## Using IAppLX from Container to configure BIG-IP
+## Using IAppLX from Container to configure BIG-IP [coming soon]
 
-Run the REST container https://gitswarm.f5net.com/f5-rest/base-container with f5-iappslx-basic-pool IAppLX package. Pass in the remote BIG-IP to be trusted when starting REST container as environment variable.
+Run the REST container [TBD] with f5-iappslx-basic-pool IAppLX package. Pass in the remote BIG-IP to be trusted when starting REST container as environment variable.
 
 Create an Application LX block with hostname, deviceGroupName, poolName, poolType and poolMembers as shown below.
 Save the JSON to block.json and use it in the curl call
