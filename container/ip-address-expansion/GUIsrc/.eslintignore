@@ -1,0 +1,5 @@
+presentation/assets/*
+build/*
+vendor/*
+presentation/bundle.js
+node_modules

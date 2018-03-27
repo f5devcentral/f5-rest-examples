@@ -1,0 +1,369 @@
+.percentage {
+    font-size: 10px;
+    width: 30px;
+    height: 20px;
+    margin-left: 10px;
+    border-radius: 4px;
+    border-color: #CCCCCC;
+    border-width: 1px;
+    border-style: solid;
+}
+
+
+.range {
+    width: 170px;
+}
+
+.subLineSpacing {
+    padding-top: 0.5em;
+    /*padding-bottom:1em;*/
+}
+
+body {
+    /*background-color: #DEDDD9;*/
+    background-color: transparent;
+    /*font: 75% "FreeSans", Arial, Helvetica, sans-serif;*/
+    /*font: 120% "FreeSans", Arial, Helvetica, sans-serif;*/
+    /* font-weight: bold;*/
+    line-height: 122%;
+    padding-bottom: 2em;
+    font-family:arial;
+    font-size:13px;
+    width:100%;
+}
+
+li {
+    list-style: none;
+    margin:0;
+}
+
+/*  Tabs  */
+#tabs {
+    height: 3em;
+    /*padding-top: 1em;*/
+}
+#tabs li {
+    float: left;
+    display: inline;
+    margin: 0 .2em;
+}
+#tabs li a {
+    display: block;
+    /*width: 5.75em;*/
+    width: 11.5em;
+    height: 3em;
+    padding-top: 1em;
+    /*padding: .35em 0;*/
+    /*border: 1px solid #bebebe;
+    border-bottom: 1px solid #999;*/
+    /*background: #a6a6a3 url(images/background_tabs.gif) repeat-x;*/
+    /*background: #a6a6a3;*/
+    color: #333;
+    text-align: center;
+}
+#tabs li a:hover, #tabs li.active a {
+    /*background-color: #deddd9;*/
+    /*background-position: 100px 0;*/
+    text-decoration: none;
+    /*color: #fc0;*/
+    color:white;
+    background-color:#838c96;
+}
+#tabs li.active a {
+    /*border-bottom: 1px solid #deddd9;*/
+    font-weight: bold;
+    /*color: #fc0;*/
+    color:white;
+    background-color:#838c96;
+}
+
+a {
+    text-decoration: none;
+}
+
+a.label {
+    display: block;
+    margin-left: 40px;
+    padding: 0 10px 0 0;
+    line-height: 40px;
+    color: #555;
+    font-weight: bold;
+}
+
+a:-webkit-any-link {
+    /*    color: -webkit-link;
+        text-decoration: underline;*/
+    cursor: auto;
+}
+
+.text {
+    color: #000;
+    /*color: #555*/
+}
+
+h1 {
+    margin-bottom: 10px;
+    padding-bottom: 3px;
+    /*border-bottom: 1px dotted #999;*/
+    font-size: 16.32px;
+    font-weight: bold;
+}
+
+.form-control{
+    font-family: FreeSans, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    height: 19px;
+}
+
+.btn {
+    font-family: FreeSans, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    height: 27px;
+}
+
+.container {
+    margin-left: 0px;
+
+}
+
+/*.tab-content{
+    border-top: solid;
+    border-width: thin;
+
+}*/
+
+.inside-container {
+    padding-bottom: 1em;
+    margin-left: 1em;
+    width:97%;
+    border: 1px solid #b3b3b3;
+}
+
+
+/*.inside-container:after{
+    position:absolute;
+    z-index:-1;
+    top:0;
+    left:0;
+    width:100%;
+    height:10%;
+    background-color:red;
+}*/
+
+
+
+.form-control {
+    color: #000;
+}
+
+.table-head {
+    background-color: #deddd9;
+}
+
+/*#routingDecisionsTab {
+    position:relative;
+    z-index:1;
+    width:200px;
+    height:200px;
+    margin:50px auto;
+    border:4px solid rgb(50,50,50);
+}*/
+
+/*.row {
+    height: 10%;
+    content:"";
+    background-color: #deddd9;
+    /!*background-color:red;*!/
+}*/
+
+.form-control {
+    padding: 0;
+}
+
+.table-label {
+    font-size: medium;
+}
+
+input[type='checkbox'] {
+    margin-right:5px;
+}
+
+hr {
+    display: block;
+    height: 2px;
+    border: 0;
+    border-top: 2px solid #b3b3b3;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.sideInput {
+    display:inline-block;
+}
+.sideDelete {
+    display:inline-block;
+    margin-left:71.5em;
+}
+.sideDeleteApplication {
+    display:inline-block;
+    margin-left:74em;
+}
+
+.btn-default{
+    height: 19px;
+    padding-top: 0px;
+}
+
+.parentTable tr:nth-child(even) {
+    background-color: white;
+    margin-bottom: 0;
+    border-collapse: collapse;
+}
+
+.innerTable tr:nth-child(even) {
+    background-color: transparent;
+}
+
+.parentTransformationTable tr:nth-child(even) {
+    background-color: white;
+    margin-bottom: 0;
+    border-collapse: collapse;
+}
+
+.innerTable tr:nth-child(even) {
+    background-color: transparent;
+}
+.nestedTable tr:nth-child(even) {
+    /*width:100%;*/
+    background-color: transparent;
+}
+
+.optionsTR{
+    background-color: rgb(254, 254, 225);
+    width: 96em;
+    padding-bottom: 1em;
+    /*padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;*/
+}
+
+.tabsDiv {
+    margin-left: 0.95em;
+    width: 92.2em;
+    background-color: rgb(242, 242, 242);
+    height: 3em;
+}
+
+.buttonsBar{
+    height: 3em;
+    width: 90em;
+}
+
+
+.internalButtonsBar{
+    height: 3em;
+    border-top: solid 1px #b3b3b3;
+    background-color: rgb(242, 242, 242);
+    width: 88.2em;
+}
+
+.topButtons {
+    margin-top: 0.7em;
+    margin-right: 1em;
+}
+
+.bottomButtons {
+    padding-top: 0.7em;
+    marginRight: 1em;
+}
+
+.verticalLine {
+    border-left: thin solid #b3b3b3;
+    margin-left: 1em;
+    padding-left: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    display:inline-block;
+}
+
+.logDiv{
+    margin-top:1em;
+    display:inline-block;
+    width:20.5em;
+    vertical-align: top;
+}
+
+.logHeaderline{
+    width:92em;
+    background-color: darkgrey;
+}
+
+.logFirstLine{
+    height: 16em;
+}
+.logSecondLine{
+    height: 21em;
+}
+
+.logLeftCol{
+    margin-left: 2em;
+}
+
+.applicationBar{
+    background: #e8e8e8; /* Old browsers */
+    background: -moz-linear-gradient(top, #e8e8e8 0%, #d7d4d4 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #e8e8e8 0%, #d7d4d4 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #e8e8e8 0%, #d7d4d4 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8e8e8', endColorstr='#d7d4d4',GradientType=0 ); /* IE6-9 */
+    border: solid 1px #b3b3b3;
+    margin-left:1em;
+    width:88.2em;
+    height: 2.5em;
+    padding-top: 0.4em;
+}
+
+.applicationTable{
+    width:88.2em;
+    margin-left: 1em;
+    border-right: solid 1px #b3b3b3;
+    border-left: solid 1px #b3b3b3;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.divBorder {
+    border: solid 1px #b3b3b3;
+    width: 88.4em;
+}
+.wide {
+    width: 60em;
+}
+
+.messagesUL {
+    margin-top: 1em;
+    height:30px;
+    overflow:hidden;
+    overflow-y:auto;
+    color: #95663F;
+}
+
+.saveConfirmation{
+    background-color: white;
+    color: black;
+    border-color: #7A9EBC;
+    background-image: url('save.png');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-position-x: 0.5em;
+    border-style: solid;
+    border-width: thin;
+    width:30em;
+    padding-top:0.5em
+}
+
+/*
+.table tr:nth-child(even) {
+    background-color: white;
+}*/
