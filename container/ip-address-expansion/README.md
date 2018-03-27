@@ -87,8 +87,8 @@ The ipAddressExpansion endpoint is a stateless worker responsible for pushing da
             "name": "bigip2.f5net.com",
             "mgmtIp": "10.144.72.193",
             "mgmtPort": 443,
-            "username": "admin",
-            "password": "admin",
+            "username": "*****",
+            "password": "*****",
             "@odata.id": "https://localhost/mgmt/shared/iapp/ipAddressExpansion/devices('bigip2.f5net.com')",
             "@odata.etag": 1
         }
