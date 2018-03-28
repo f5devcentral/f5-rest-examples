@@ -16,7 +16,6 @@
 
 'use strict';
 
-const url = require("url");
 const logger = require('f5-logger').getInstance();
 
 const util = require('./helper');
@@ -26,7 +25,6 @@ const uriPath = 'shared/iapp/ipAddressExpansion';
 const configUrlPath = `${uriPath}/config`;
 const deviceUrlPath = `${uriPath}/devices`;
 const deviceGroupPath = `shared/resolver/device-groups/dockerContainers/devices`;
-const legacyDeviceGroupPath = `shared/resolver/device-groups/dockerContainersLegacy/devices`;
 
 // TODO remove in memory state, used for cleaning up config
 let state = {};
@@ -58,14 +56,15 @@ class HttpRequestWorker {
     }
 
     onStartCompleted(success) {
-        const deviceGroupUrl = this.restHelper.makeRestjavadUri(deviceGroupPath);
-        const legacyDeviceGroupUrl = this.restHelper.makeRestjavadUri(legacyDeviceGroupPath);
-
-        logger.info('getting trusted devices', deviceGroupUrl, legacyDeviceGroupUrl);
-        util.getTrustedDevices.call(this, deviceGroupUrl, legacyDeviceGroupUrl)
-        .then((data) => {
-            logger.info('all data', data);
-            return data.items.map((device) => {
+        logger.info('getting trusted devices');
+        util.getDeviceGroupsLike.call(this, 'dockerContainers')
+        .then((deviceGroups) => {
+            logger.info('device groups', deviceGroups);
+            return util.getTrustedDevicesInGroups.call(this, deviceGroups);
+        })
+        .then((trustedDevices) => {
+            logger.info('trusted devices', trustedDevices);
+            return trustedDevices.map((device) => {
                 if (device.hostname) {
                     return {
                         name: device.hostname,

@@ -227,6 +227,61 @@ const getTrustedDevices = function (deviceGroupUrl, legacyDeviceGroupUrl) {
 };
 
 /**
+ * Get the list of trusted devices from array of device groups
+ * /shared/resolver/device-groups/{groupName}/devices
+ *
+ * @param {Array} deviceGroups array of group names
+ * @returns {Promise}
+ */
+const getTrustedDevicesInGroups = function (deviceGroups) {
+    deviceGroups = Array.isArray(deviceGroups) ? deviceGroups : [];
+    const promises = deviceGroups.map((deviceGroup) => {
+        const path = `shared/resolver/device-groups/${deviceGroup}/devices`;
+        const deviceGroupUri = this.restHelper.makeRestjavadUri(path);
+        return sendGet.call(this, deviceGroupUri);
+    });
+
+    return Promise.all(promises).then((responses) => {
+        let trustedDevices = responses.map((response) => {
+
+            if (response && response.getBody) {
+                const data = response.getBody();
+                if (data && data.items) {
+                    return data.items;
+                }
+            }
+        });
+
+        return [].concat.apply([], trustedDevices);
+    });
+};
+
+/**
+ * Get device groups that start with a string
+ *
+ * @param {String} match
+ * @returns {Promise}
+ */
+const getDeviceGroupsLike = function (match) {
+    match = match || 'dockerContainers';
+
+    const deviceGroupsUri = this.restHelper.makeRestjavadUri('shared/resolver/device-groups');
+    const getDeviceGroups = sendGet.call(this, deviceGroupsUri);
+
+    return getDeviceGroups.then((restOp) => {
+        const body = restOp.getBody();
+        if (!(body && body.items)) { return []; }
+
+        return body.items.map((deviceGroup) => {
+            if (deviceGroup && deviceGroup.groupName && deviceGroup.groupName.startsWith(match)) {
+                return deviceGroup.groupName;
+            }
+            return false;
+        }).filter(Boolean);
+    });
+};
+
+/**
  * Get the config and update all devices
  * @param {String} configPath
  * @param {String} devicePath
@@ -438,6 +493,8 @@ const cleanRemoteDevices = function (state) {
 
 
 module.exports = {
+    getDeviceGroupsLike: getDeviceGroupsLike,
+    getTrustedDevicesInGroups: getTrustedDevicesInGroups,
     getDevicesAndConfig: getDevicesAndConfig,
     getConfigAndSendToDevices: getConfigAndSendToDevices,
     notifyApp: notifyApp,
