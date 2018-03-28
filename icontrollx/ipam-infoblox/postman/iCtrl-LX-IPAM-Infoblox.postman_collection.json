@@ -1,0 +1,414 @@
+{
+	"info": {
+		"name": "iCtrl-LX-IPAM-Infoblox",
+		"_postman_id": "5ecf6603-fdde-d69e-d8a4-f161c4c37c76",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "3_Delete-Host",
+			"description": "Delete a host defined in Infoblox to release the IP",
+			"item": [
+				{
+					"name": "Request a Token from iWorkflow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has token: \" +respData.token.token] = respData.token.token;",
+									"",
+									"postman.setEnvironmentVariable('iwf_token',respData.token.token);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": {{iwf_username}},\n  \"password\": {{iwf_password}},\n  \"loginProvidername\": \"tmos\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authn/login",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authn",
+								"login"
+							]
+						},
+						"description": "Using Basic Auth, request a token from the iWorkflow platform."
+					},
+					"response": []
+				},
+				{
+					"name": "Increase Auth Token Timeout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"tests[\"Auth Token timeout is: \" +respData.timeout] = respData.timeout;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timeout\":\"36000\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authz/tokens/{{iwf_token}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{iwf_token}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Release IP from FQDN",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/workers/ipam-infoblox/{{fqdn}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"workers",
+								"ipam-infoblox",
+								"{{fqdn}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2_Get-IP",
+			"description": "Get the IP assigned to a Hostname",
+			"item": [
+				{
+					"name": "Request a Token from iWorkflow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has token: \" +respData.token.token] = respData.token.token;",
+									"",
+									"postman.setEnvironmentVariable('iwf_token',respData.token.token);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": {{iwf_username}},\n  \"password\": {{iwf_password}},\n  \"loginProvidername\": \"tmos\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authn/login",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authn",
+								"login"
+							]
+						},
+						"description": "Using Basic Auth, request a token from the iWorkflow platform."
+					},
+					"response": []
+				},
+				{
+					"name": "Increase Auth Token Timeout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"tests[\"Auth Token timeout is: \" +respData.timeout] = respData.timeout;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timeout\":\"36000\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authz/tokens/{{iwf_token}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{iwf_token}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get IP from FQDN",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/workers/ipam-infoblox/{{fqdn}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"workers",
+								"ipam-infoblox",
+								"{{fqdn}}"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "1_Allocate-IP",
+			"description": "Will request an IP to infoblox based on a subnet. Host has to be a FQDN",
+			"item": [
+				{
+					"name": "Request a Token from iWorkflow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"",
+									"tests[\"response has token: \" +respData.token.token] = respData.token.token;",
+									"",
+									"postman.setEnvironmentVariable('iwf_token',respData.token.token);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": {{iwf_username}},\n  \"password\": {{iwf_password}},\n  \"loginProvidername\": \"tmos\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authn/login",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authn",
+								"login"
+							]
+						},
+						"description": "Using Basic Auth, request a token from the iWorkflow platform."
+					},
+					"response": []
+				},
+				{
+					"name": "Increase Auth Token Timeout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var respData = JSON.parse(responseBody);",
+									"tests[\"Auth Token timeout is: \" +respData.timeout] = respData.timeout;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"timeout\":\"36000\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/authz/tokens/{{iwf_token}}",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"authz",
+								"tokens",
+								"{{iwf_token}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Request an IP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-F5-Auth-Token",
+								"value": "{{iwf_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"{{fqdn}}\",\n\t\"subnet\": \"{{subnet}}\"\n}"
+						},
+						"url": {
+							"raw": "https://{{iwf_mgmt}}/mgmt/shared/workers/ipam-infoblox",
+							"protocol": "https",
+							"host": [
+								"{{iwf_mgmt}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"workers",
+								"ipam-infoblox"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
