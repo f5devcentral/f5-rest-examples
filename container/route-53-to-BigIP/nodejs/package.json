@@ -1,0 +1,13 @@
+{
+  "name": "route-53-to-bigip",
+  "version": "1.0.0",
+  "description": "Custom F5 iLX worker",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Tenenbaum",
+  "license": "Apache License, Version 2.0",
+  "dependencies": {
+    "aws-sdk": "^2.216.1"
+  }
+}
