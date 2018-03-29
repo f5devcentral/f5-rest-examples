@@ -9,24 +9,7 @@ const constants = {
     tokenUrl: '/mgmt/shared/authn/login'
   },
   fields,
-  getBlockFullPath: id => `https://localhost/mgmt/shared/iapp/blocks/${id}`,
-  maxErrorCount: 10,
-  appState: {
-    ONLINE: 'ONLINE',
-    OFFLINE: 'OFFLINE',
-    DISABLED: 'DISABLED',
-    ERROR: 'ERROR',
-    TRANSITION: 'TRANSITION',
-    UNKNOWN: 'UNKNOWN',
-  },
-  blockState: {
-    BINDING: 'BINDING',
-    BOUND: 'BOUND',
-    UNBINDING: 'UNBINDING',
-    UNBOUND: 'UNBOUND',
-    TEMPLATE: 'TEMPLATE',
-    ERROR: 'ERROR',
-  },
+  maxErrorCount: 10
 };
 
 export default constants;

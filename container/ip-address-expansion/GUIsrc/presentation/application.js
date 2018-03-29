@@ -11,14 +11,12 @@ import routes from './routes';
 let my_helper = require('./helpers/my_helper.js');
 
 export const history = syncHistoryWithStore(hashHistory, store);
-//let clientId = store.getState().iapp.get('clientId');
 
 my_helper.getToken()
     .then(()=>{
         return my_helper.GetInitialConfig();
     })
     .then((response) => {
-        //console.log("response", response);
         let serverResponse = JSON.parse(JSON.stringify(response));
         store.dispatch({ type: '@@f5/LOAD_CONFIG', payload: serverResponse});
     })
