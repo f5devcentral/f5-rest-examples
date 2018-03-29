@@ -16,6 +16,19 @@
 
 "use strict";
 
+/**
+ *
+ * @param item: represents author object
+ * @return item netWorth value
+ */
+const netWorthDefaultUpdate = function(item) {
+    if (item.netWorth) {
+        return item.netWorth + 0.1;
+    }
+
+    return item.netWorth;
+};
+
 class AuthorWorker {
     constructor() {
         this.WORKER_URI_PATH = "shared/authors";
@@ -49,7 +62,7 @@ class AuthorWorker {
             id: item.id,
             name: item.name,
             books: item.books,
-            netWorth: this.netWorthDefaultUpdate(item)
+            netWorth: netWorthDefaultUpdate(item)
         };
     }
 
@@ -71,18 +84,6 @@ class AuthorWorker {
                 { name: 'netWorth', type: 'Edm.Double' }
             ]
         };
-    }
-
-    /**
-     *
-     * @param item: represents author object
-     * @return item netWorth value
-    */
-    netWorthDefaultUpdate(item) {
-        if (item.netWorth) {
-            return item.netWorth + 0.1;
-        }
-        return item.netWorth;
     }
 }
 
