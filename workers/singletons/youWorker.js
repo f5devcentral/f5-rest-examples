@@ -33,11 +33,11 @@ class YouWorker {
     getDefaultState() {
         return new Promise((resolve, reject)=> {
             resolve({
-                FirstName: 'Keith',
-                LastName: 'Jia',
-                UserName: 'jia',
+                FirstName: 'foo',
+                LastName: 'bar',
+                UserName: 'foobar',
                 Emails: [
-                    'k.jia@f5.com'
+                    'foobar@foobar.com'
                 ]
             });
         });
@@ -50,7 +50,18 @@ class YouWorker {
      * @memberof YouWorker
      */
     getSchema() {
-        return require('odata/sample/models/person');
+        return {
+            name: 'Person',
+            key: {
+                propertyRefs: [{ name: 'UserName' }]
+            },
+            properties: [
+                { name: 'UserName', type: 'Edm.String', nullable: false },
+                { name: 'FirstName', type: 'Edm.String', nullable: false },
+                { name: 'LastName', type: 'Edm.String', nullable: false },
+                { name: 'Emails', type: 'Collection(Edm.String)' }
+            ]
+        };
     }
 }
 

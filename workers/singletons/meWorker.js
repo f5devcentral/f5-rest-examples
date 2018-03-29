@@ -32,12 +32,12 @@ class MeWorker {
      */
     getDefaultState() {
         return {
-            FirstName: 'Joe',
-            LastName: 'Alonso',
-            UserName: 'alonso',
+            FirstName: 'foo',
+            LastName: 'bar',
+            UserName: 'foobar',
             Emails: [
-                'j.alonso@f5.com',
-                'alonso@f5.com'
+                'abc@abc.com',
+                'def@def.com'
             ]
         };
     }
@@ -49,7 +49,18 @@ class MeWorker {
      * @memberof MeWorker
      */
     getSchema() {
-        return require('odata/sample/models/person');
+        return {
+            name: 'Person',
+            key: {
+                propertyRefs: [{ name: 'UserName' }]
+            },
+            properties: [
+                { name: 'UserName', type: 'Edm.String', nullable: false },
+                { name: 'FirstName', type: 'Edm.String', nullable: false },
+                { name: 'LastName', type: 'Edm.String', nullable: false },
+                { name: 'Emails', type: 'Collection(Edm.String)' }
+            ]
+        };
     }
 }
 

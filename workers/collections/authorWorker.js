@@ -18,8 +18,8 @@
 
 class AuthorWorker {
     constructor() {
-        this.WORKER_URI_PATH = "shared/authors"; //demo purpose, final collection URI convention may change
-        this.isPersisted = true; //TODO this is redundant if the worker is a "collection"
+        this.WORKER_URI_PATH = "shared/authors";
+        this.isPersisted = true;
         this.isPublic = true;
     }
 
