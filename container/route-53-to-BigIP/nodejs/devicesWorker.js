@@ -57,3 +57,4 @@ class DevicesWorker {
     }
 }
 module.exports = DevicesWorker;
+
