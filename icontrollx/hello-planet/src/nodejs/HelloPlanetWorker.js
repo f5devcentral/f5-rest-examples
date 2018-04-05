@@ -15,6 +15,7 @@
 
 "use strict";
 
+const helloPlanetUrlPath = "/Hello";
 const planetUrlPath = "/Planet";
 
 /**
@@ -23,7 +24,7 @@ const planetUrlPath = "/Planet";
  */
 class HelloPlanetWorker {
     constructor() {
-        this.WORKER_URI_PATH = "/Hello";
+        this.WORKER_URI_PATH = helloPlanetUrlPath;
         this.isPublic = true;
     }
 
@@ -31,11 +32,11 @@ class HelloPlanetWorker {
      * onStart handler
      * 
      * This function is called before the worker becomes available
-     * 
+     *
      * @param {Function} success 
      */
     onStart(success) {
-        var planetUrl = this.restHelper.makeRestnodedUri(planetUrlPath);
+        const planetUrl = this.restHelper.makeRestnodedUri(planetUrlPath);
         this.dependencies.push(planetUrl);
 
         success();
@@ -47,40 +48,48 @@ class HelloPlanetWorker {
      */
     onGet(restOperation) {
         //HTTP get to dependency planet worker
-        sendGet.call(this, planetUrlPath, restOperation.getBasicAuthorization())
+        this.sendGet(planetUrlPath, restOperation.getBasicAuthorization())
         .then((response) => {
-            restOperation.setContentType("text/plain");
-            restOperation.setBody(sayHello(response.getBody().planet));
-            this.completeRestOperation(restOperation);
+            this.completeOperation(restOperation, this.sayHello(response.getBody().planet));
         }, (err) => {
-            restOperation.fail(err);
+            this.logger.error(err);
+            this.completeOperation(restOperation, this.sayHello());
         });
     }
 
+    completeOperation(restOperation, body) {
+        restOperation.setContentType("text/plain");
+        restOperation.setBody(body);
+        this.completeRestOperation(restOperation);
+    }
 
-    /// Public Function ///
+    /**
+     * Make a basic REST Op. The URI identifies the path/host/port. The method is a
+     * camelcase HTTP verb (i.e. Post, Get, Put, ...). The basicAuth is used for authentication
+     * details on the call.
+     * @param {String} fullUrl - url path for rest query
+     * @return {Promise} promise with output from REST operation
+     */
+    sendGet(fullUrl ,basicAuth) {
+        var restOp = this.restOperationFactory.createRestOperationInstance()
+            .setUri(this.restHelper.makeRestnodedUri(fullUrl))
+            .setIsSetBasicAuthHeader(!!basicAuth)
+            .setBasicAuthorization(basicAuth);
+        return this.restRequestSender.sendGet(restOp);
+    }
 
+    /**
+     * Return a Hello [planet] string
+     *
+     * @param {String} planet
+     * @return {String}
+     */
     sayHello(planet) {
-        planet = planet || 'World';
+        planet = planet || "World";
         return `Hello ${planet}`;
     }
 }
 
-/// Private Functions ///
 
-/**
- * Make a basic REST Op. The URI identifies the path/host/port. The method is a
- * camelcase HTTP verb (i.e. Post, Get, Put, ...). The basicAuth is used for authentication
- * details on the call.
- * @param {String} fullUrl - url path for rest query
- * @return {Promise} promise with output from REST operation
- */
-function sendGet(fullUrl ,basicAuth) {
-    var restOp = this.restOperationFactory.createRestOperationInstance()
-        .setUri(this.restHelper.makeRestnodedUri(fullUrl))
-        .setIsSetBasicAuthHeader(!!basicAuth)
-        .setBasicAuthorization(basicAuth);
-    return this.restRequestSender.sendGet(restOp);
-};
 
 module.exports = HelloPlanetWorker;

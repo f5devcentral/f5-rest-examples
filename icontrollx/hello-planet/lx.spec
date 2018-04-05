@@ -1,6 +1,6 @@
 Summary: F5 Basic iControlLX
 Name: hello-planet
-Version: 0.0.1
+Version: 0.0.4
 Release: 0001
 BuildArch: noarch
 Group: Development/Libraries

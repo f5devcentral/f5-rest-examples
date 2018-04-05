@@ -4,7 +4,8 @@
   "private": true,
   "description": "basic icontrolLX plugin",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec",
+    "e2e": "./node_modules/.bin/mocha ./test/e2e --recursive --reporter spec",
+    "test": "./node_modules/.bin/mocha ./test/unit --recursive --reporter spec",
     "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha -- -R spec",
     "docs": "./node_modules/jsdoc/jsdoc.js -r ./src -d ./docs",
     "build": "npm prune --production && rpmbuild --define \"main `pwd`\" --define \"_topdir %{main}/build\" -bb lx.spec"
@@ -13,8 +14,9 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "istanbul": "^0.2.11",
-    "jsdoc": "^3.4.0",
-    "mocha": "^2.4.5"
+    "chai": "^4.1.2",
+    "istanbul": "^0.4.5",
+    "jsdoc": "^3.5.5",
+    "mocha": "^5.0.5"
   }
 }
