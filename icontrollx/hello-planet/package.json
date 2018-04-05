@@ -1,0 +1,20 @@
+{
+  "name": "hello-planet",
+  "version": "1.0.0",
+  "private": true,
+  "description": "basic icontrolLX plugin",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec",
+    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha -- -R spec",
+    "docs": "./node_modules/jsdoc/jsdoc.js -r ./src -d ./docs",
+    "build": "npm prune --production && rpmbuild --define \"main `pwd`\" --define \"_topdir %{main}/build\" -bb lx.spec"
+  },
+  "author": "iappsdev@f5.com",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "istanbul": "^0.2.11",
+    "jsdoc": "^3.4.0",
+    "mocha": "^2.4.5"
+  }
+}
