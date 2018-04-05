@@ -83,4 +83,4 @@ module.exports = {
     checkRestEndpoint: checkRestEndpoint,
     getRequestOptions: getRequestOptions,
     getBasicAuthorization: getBasicAuthorization
-}
+};

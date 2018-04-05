@@ -57,6 +57,14 @@ class HelloPlanetWorker {
         });
     }
 
+    /// Helper Functions ///
+
+    /**
+     * Helper function to set body, content type
+     * and resolve operation
+     * @param {Object} restOperation
+     * @param {String} body
+     */
     completeOperation(restOperation, body) {
         restOperation.setContentType("text/plain");
         restOperation.setBody(body);
@@ -89,7 +97,5 @@ class HelloPlanetWorker {
         return `Hello ${planet}`;
     }
 }
-
-
 
 module.exports = HelloPlanetWorker;
