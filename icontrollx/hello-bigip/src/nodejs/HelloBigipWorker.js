@@ -115,7 +115,7 @@ class HelloBigipWorker {
         const start = parseInt(body.start.split('.').pop(), 10);
         const end = parseInt(body.end.split('.').pop(), 10);
         if (start > end) {
-            throw new Error("start address must be lower than end address");
+            throw new Error(`${body.start} address last octet must be lower than ${body.end} address`);
         }
 
         return true;
