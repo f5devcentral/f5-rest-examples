@@ -1,6 +1,6 @@
 Summary: F5 Basic iControlLX
 Name: hello-bigip
-Version: 0.0.6
+Version: 0.0.7
 Release: 0001
 BuildArch: noarch
 Group: Development/Libraries

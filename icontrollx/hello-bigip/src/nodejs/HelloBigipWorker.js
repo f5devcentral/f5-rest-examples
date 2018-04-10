@@ -16,7 +16,6 @@
 
 "use strict";
 
-const url = require('url');
 const logger = require('f5-logger').getInstance();
 
 /**
@@ -37,8 +36,8 @@ class HelloBigipWorker {
         logger.info('/Nodes GET request');
 
         this.getNodes(restOperation)
-        .then((nodes)=> {
-            const body = nodes.getBody();
+        .then((response)=> {
+            const body = response.getBody();
             const items = body.items || [];
             restOperation.setBody(items);
             this.completeRestOperation(restOperation);
@@ -109,8 +108,8 @@ class HelloBigipWorker {
             throw new Error("body needs 'start' and 'end' values");
         }
 
-        if (!(this.isValidIPv4(body.start) && this.isValidIPv4(body.end))) {
-            throw new Error("start and end are invalid IPv4 addresses");
+        if (!(this.isValidIPv4(body.start) || this.isValidIPv4(body.end))) {
+            throw new Error("start or end are invalid IPv4 addresses");
         }
 
         const start = parseInt(body.start.split('.').pop(), 10);
@@ -167,7 +166,7 @@ class HelloBigipWorker {
         const nodeUrl = this.restHelper.makeRestjavadUri('tm/ltm/node');
 
         const restOp = this.restOperationFactory.createRestOperationInstance()
-            .setUri(url.parse(nodeUrl))
+            .setUri(nodeUrl)
             .setBody(node)
             .setIsSetBasicAuthHeader(true)
             .setBasicAuthorization(originalRestOp.getBasicAuthorization());
@@ -176,11 +175,17 @@ class HelloBigipWorker {
     }
 
 
+    /**
+     * Get all ltm nodes
+     *
+     * @param {RestOperation} originalRestOp
+     * @returns {Promise}
+     */
     getNodes(originalRestOp) {
         const nodeUrl = this.restHelper.makeRestjavadUri('tm/ltm/node');
 
         const restOp = this.restOperationFactory.createRestOperationInstance()
-            .setUri(url.parse(nodeUrl))
+            .setUri(nodeUrl)
             .setIsSetBasicAuthHeader(true)
             .setBasicAuthorization(originalRestOp.getBasicAuthorization());
 
