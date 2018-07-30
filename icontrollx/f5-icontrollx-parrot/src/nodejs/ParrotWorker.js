@@ -18,73 +18,72 @@
 
 /**
  * A test processor that echos back a value that is stored in its block.
- * @constructor
  */
-function ParrotWorker() {
-}
+class ParrotWorker {
+    constructor() {
+        this.WORKER_URI_PATH = "shared/iapp/processors/parrot";
+        this.isPublic = true;
+    }
 
-ParrotWorker.prototype.WORKER_URI_PATH = "shared/iapp/processors/parrot";
+    onStart(success) {
+        // Overriding the default presentation
+        this.setPresentationHtmlFilepath("iapps/f5-icontrollx-parrot/index.html");
+        this.setPresentationScriptFilepath("iapps/f5-icontrollx-parrot/js/parrot.js");
 
-ParrotWorker.prototype.onStart = function (success) {
-    this.isPublic = true;
+        success();
+    }
 
-    // Overriding the default presentation
-    this.setPresentationHtmlFilepath("iapps/f5-iAppsLX-parrot/index.html");
-    this.setPresentationScriptFilepath("iapps/f5-iAppsLX-parrot/js/parrot.js");
-
-    success();
-};
-
-/**
- * Handles Get event
- * @param {RestOperation} restOperation
- */
-ParrotWorker.prototype.onGet = function(restOperation) {
-    restOperation.setBody({
+    /**
+     * Handles Get event
+     * @param {RestOperation} restOperation
+     */
+    onGet(restOperation) {
+        restOperation.setBody({
             reply: "squawk!"
         });
 
-    this.completeRestOperation(restOperation);
-};
-
-/**
- * Handles Post event
- * @param {RestOperation} restOperation
- */
-ParrotWorker.prototype.onPost = function(restOperation) {
-    var post = restOperation.getBody();
-    var say = post.say;
-
-    if (!say) {
-        restOperation.setBody({
-                reply: "squawk!"
-            });
-        restOperation.complete();
-        return;
+        this.completeRestOperation(restOperation);
     }
 
-    say = "squawk! " + say;
-    restOperation.setBody({
+    /**
+     * Handles Post event
+     * @param {RestOperation} restOperation
+     */
+    onPost(restOperation) {
+        var post = restOperation.getBody();
+        var say = post.say;
+
+        if (!say) {
+            restOperation.setBody({
+                reply: "squawk!"
+            });
+            restOperation.complete();
+            return;
+        }
+
+        say = "squawk! " + say;
+        restOperation.setBody({
             reply: say
         });
 
-    this.completeRestOperation(restOperation);
-};
+        this.completeRestOperation(restOperation);
+    }
 
-/**
- * Handles Put event
- * @param {RestOperation} restOperation
- */
-ParrotWorker.prototype.onPut = function(restOperation) {
-    return this.onPost(restOperation);
-};
+    /**
+     * Handles Put event
+     * @param {RestOperation} restOperation
+     */
+    onPut(restOperation) {
+        return this.onPost(restOperation);
+    }
 
-/**
- * Handles Patch event
- * @param {RestOperation} restOperation
- */
-ParrotWorker.prototype.onPatch = function(restOperation) {
-    return this.onPost(restOperation);
-};
+    /**
+     * Handles Patch event
+     * @param {RestOperation} restOperation
+     */
+    onPatch(restOperation) {
+        return this.onPost(restOperation);
+    }
+}
 
 module.exports = ParrotWorker;
