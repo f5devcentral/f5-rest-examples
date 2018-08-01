@@ -1,0 +1,17 @@
+{
+  "instanceName": {
+    "caption": "Instance Name",
+    "description": "A name of virtual server in which this iApp will create",
+    "help": ""
+  },
+  "virtual": {
+    "caption": "Virtual Server Name",
+    "description": "A name of virtual server in which this iApp will create",
+    "help": ""
+  },
+  "pool": {
+    "caption": "Pool",
+    "description": "A name of a pool attached to virtual server",
+    "help": ""
+  }
+}

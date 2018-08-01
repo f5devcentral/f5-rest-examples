@@ -1,0 +1,31 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "no-did-mount-set-state": "off",
+    "prop-types": "off",
+    "indent": [ "error", 2],
+    "linebreak-style": [ "error", "unix" ],
+    "semi": [ "error", "always" ],
+    "no-console": [ "warn" ],
+    "new-cap": [ "warn" ],
+    "prefer-template": [ "warn" ]
+  }
+}

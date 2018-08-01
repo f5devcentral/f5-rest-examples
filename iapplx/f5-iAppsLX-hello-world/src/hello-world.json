@@ -1,0 +1,25 @@
+{
+  "name": "hello-world",
+  "inputProperties": [
+    {
+      "id": "Hello",
+      "type": "STRING",
+      "value": "iApp World",
+      "metaData": {}
+    }
+  ],
+  "configurationProcessorReference": {
+    "link": "https://localhost/mgmt/shared/iapp/processors/hello-world-js"
+  },
+  "statsProcessorReference": {
+    "link": ""
+  },
+  "auditProcessorReference": {
+    "link": ""
+  },
+  "audit": {
+    "intervalSeconds": 0,
+    "policy": "NOTIFY_ONLY"
+  },
+  "state": "TEMPLATE"
+}

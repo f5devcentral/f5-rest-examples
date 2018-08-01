@@ -1,0 +1,11 @@
+{
+  "name": "route-53-to-bigip",
+  "version": "1.0.0",
+  "description": "Custom F5 iLX worker",
+  "scripts": {},
+  "author": "Alex Tenenbaum",
+  "license": "Apache License, Version 2.0",
+  "dependencies": {
+    "aws-sdk": "^2.224.1"
+  }
+}
